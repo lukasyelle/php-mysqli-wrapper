@@ -3,7 +3,7 @@ Having struggled to find a secure, easy, wrapper to use with PHP for MySQLi data
 
 This PHP MySQLi wrapper makes database integration easy, it aims to improve the security and efficiency of PHP developers. The class makes use of dynamically generated prepared statements based on the query you are preforming, and the database you are preforming it on, while securely escaping all user input before the query is executed.
  
-It uses the Halite PHP encryption library by Paragon Initiative in the background, to keep the data you need secure, with just a modification the the initial class instantiation.
+It **will eventually** use the Halite PHP encryption library by Paragon Initiative in the background, to keep the data you need secure, with just a modification the the initial class instantiation.
 
 ### Prerequisites
 
@@ -37,7 +37,25 @@ After including Database.php in your project, it is straight forward to use in y
 $table = new Table("table_name");
 
 # Then, operations like inserting, selecting, updating and soon deleting are made easy and secure.
-$result = $table->select(Array("table_column"=>"where_value")); # This is read, "from my table, select all the rows where table_column = where_value"
+
+# Insert query, returns either an array with error information, or "Success."
+# The key of the array represents the column, and the value is what to insert.
+# If you miss a column, it will use the default value for whatever type the column is.
+$insert_result = $table->insert(Array(
+    "table_column_1"=>"table_value_1",
+    "table_column_2"=>"table_value_2",
+    "table_column_3"=>"table_value_3",
+));
+
+# Select query, returns an array of each row that matched the sent values.
+# This is read, "from my table, select all the rows where table_column = where_value"
+
+$select_result = $table->select(Array("table_column"=>"where_value")); 
+
+# Update query, returns either an array with error information, or "Success."
+# This is read:
+# "from my table, update all of the following table_columns with the associated new_values where where_table_column = where_value" 
+$update_result = $table->update(Array("table_column"=>"new_value"),Array("where_table_column"=>"where_value"));
 
 ?>
 ```
