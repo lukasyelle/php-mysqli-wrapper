@@ -19,4 +19,4 @@ $charset = 'utf8';
 
 $encryption_key_path = "/"; // The path to the encryption key directory.
 
-$base_url = "http://sbmaster.student.rit.edu"; // The web path to the very base file in the frontend.
+$base_url = ""; // The web path to the very base file in the frontend.
