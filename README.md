@@ -49,7 +49,6 @@ $insert_result = $table->insert(Array(
 
 # Select query, returns an array of each row that matched the sent values.
 # This is read, "from my table, select all the rows where table_column = where_value"
-
 $select_result = $table->select(Array("table_column"=>"where_value")); 
 
 # Update query, returns either an array with error information, or "Success."
