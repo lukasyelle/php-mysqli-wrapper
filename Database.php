@@ -469,22 +469,22 @@ class Database extends DB_Backend {
 
             $data = $stmt->result_metadata();
             $fields = array();
-            $currentrow = array();
+            $current_row = array();
             $results = array();
 
-            // Store references to keys in $currentrow
+            // Store references to keys in $current_row
             while ($field = mysqli_fetch_field($data)) {
-                $fields[] = &$currentrow[$field->name];
+                $fields[] = &$current_row[$field->name];
             }
 
-            // Bind statement to $currentrow using the array of references
+            // Bind statement to $current_row using the array of references
             call_user_func_array(array($stmt,'bind_result'), $fields);
 
-            // Iteratively refresh $currentrow array using "fetch", store values from each row in $results array
+            // Iteratively refresh $current_row array using "fetch", store values from each row in $results array
             $i = 0;
             while ($stmt->fetch()) {
                 $results[$i] = array(); //this is supposed to be outside the foreach
-                foreach($currentrow as $key => $val) {
+                foreach($current_row as $key => $val) {
                     $results[$i][$key] = $val;
                 }
                 $i++;
